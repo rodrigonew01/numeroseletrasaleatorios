@@ -1,17 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #75756577;
 }
+
 h1 {
     margin-bottom: 20px;
     color: #333;
@@ -26,19 +28,56 @@ h1 {
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    gap: 25px;
+  display: inline flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 25px 20px 22px;
+  box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  background-color: #e8e8e8;
+  border-color: #ffe2e2;
+  border-style: solid;
+  border-width: 9px;
+  border-radius: 35px;
+  font-size: 25px;
+  cursor: pointer;
+  font-weight: 900;
+  color: rgb(134, 124, 124);
+  font-family: monospace;
+  transition:
+    transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
+    border-color 400ms ease-in-out,
+    background-color 400ms ease-in-out;
+  word-spacing: -2px;
+}
+
+@keyframes movingBorders {
+  0% {
+    border-color: #fce4e4;
+  }
+
+  50% {
+    border-color: #ffd8d8;
+  }
+
+  90% {
+    border-color: #fce4e4;
+  }
 }
 
 button:hover {
-    background-color: #0056b3;
-    color: #942020;
+  background-color: #eee;
+  transform: scale(105%);
+  animation: movingBorders 3s infinite;
+}
+
+button svg {
+  margin-right: 11px;
+  fill: rgb(255, 110, 110);
+  transition: opacity 100ms ease-in-out;
+}
+button:hover svg {
+    opacity: 0.7;
 }
 
 #numberDisplay {
@@ -73,11 +112,13 @@ button:hover {
     justify-content: center;
     margin-top: 20px;
 }
+
 .bingo-column {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .bingo-header {
     font-weight: bold;
     font-size: 20px;
@@ -89,6 +130,7 @@ button:hover {
     background: linear-gradient(180deg, #ffffff, #e6e6e6);
     border: 2px solid #ccc;
 }
+
 .bingo-cells {
     /* Grid with 5 rows (fixed slots) */
     display: grid;
@@ -99,6 +141,7 @@ button:hover {
     align-items: center;
     justify-items: center;
 }
+
 .bingo-cell {
     inline-size: 48px;
     block-size: 48px;
@@ -108,9 +151,10 @@ button:hover {
     border-radius: 6px;
     background-color: #fff;
     border: 2px solid #007BFF;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     font-weight: bold;
 }
+
 .bingo-cell.marked {
     background-color: #007BFF;
     color: #fff;
@@ -118,11 +162,30 @@ button:hover {
 }
 
 /* Optional: different header colors per letter */
-#col-B .bingo-header { background-color: #cfe8ff; border-color: #7fb3ff; }
-#col-I .bingo-header { background-color: #ffe6cf; border-color: #ffc07f; }
-#col-N .bingo-header { background-color: #e6ffd6; border-color: #9fe79f; }
-#col-G .bingo-header { background-color: #ffe6f0; border-color: #ff9fcf; }
-#col-O .bingo-header { background-color: #f0e6ff; border-color: #c79fff; }
+#col-B .bingo-header {
+    background-color: #cfe8ff;
+    border-color: #7fb3ff;
+}
+
+#col-I .bingo-header {
+    background-color: #ffe6cf;
+    border-color: #ffc07f;
+}
+
+#col-N .bingo-header {
+    background-color: #e6ffd6;
+    border-color: #9fe79f;
+}
+
+#col-G .bingo-header {
+    background-color: #ffe6f0;
+    border-color: #ff9fcf;
+}
+
+#col-O .bingo-header {
+    background-color: #f0e6ff;
+    border-color: #c79fff;
+}
 
 /* Visual cue for completed column */
 .bingo-column.column-complete .bingo-header {
@@ -146,7 +209,8 @@ button:hover {
 }
 
 /* Visual cue for full card */
-.cartela-completa, body.cartela-completa {
+.cartela-completa,
+body.cartela-completa {
     background-color: #dab027;
 }
 
@@ -160,6 +224,7 @@ button:hover {
     pointer-events: none;
     z-index: 9999;
 }
+
 .fireworks-overlay .firework-burst {
     position: absolute;
     width: 16px;
@@ -167,9 +232,10 @@ button:hover {
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0.2);
     opacity: 0.95;
-    box-shadow: 0 0 12px rgba(255,255,255,0.9), 0 0 24px rgba(255,255,255,0.6);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 24px rgba(255, 255, 255, 0.6);
     animation: burst 1.2s ease-out forwards;
 }
+
 .fireworks-overlay .firework-burst::after {
     content: '';
     position: absolute;
@@ -179,33 +245,71 @@ button:hover {
     height: 120px;
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0.1);
-    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.0) 60%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.0) 60%);
     opacity: 0.14;
 }
+
 @keyframes burst {
-    0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
-    60% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 1;
+    }
+
+    60% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
 }
-.fireworks-overlay.fade-out { opacity: 0; transition: opacity 1s ease; }
+
+.fireworks-overlay.fade-out {
+    opacity: 0;
+    transition: opacity 29s ease;
+}
 
 #drawnNumbersList {
     list-style-type: none;
     padding: 0;
 }
+
 #drawnNumbersList li {
     margin: 5px 0;
 }
+
 img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 11%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10%;
+    margin-top: 10px;
+    border-radius: 9px;
+
+
+}
+
+.eva {
     display: block;
     margin-left: auto;
     margin-right: auto;
     max-height: 100%;
     max-width: 100%;
     height: auto;
-    margin-bottom:10%;
-    margin-top:10px;
+    margin-bottom: 1%;
+    margin-top: -9%;
     border-radius: 9px;
+    width: 150px;
+    box-shadow: inset 2px 3px 19px rgba(0, 0, 0, 0.5);
 
-    
+}
+
+img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
