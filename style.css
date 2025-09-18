@@ -1,0 +1,211 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: #942020;
+}
+
+#numberDisplay {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    min-height: 30px;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #e9ecef;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+#history {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Bingo panel styles */
+.bingo-panel {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.bingo-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bingo-header {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    width: 60px;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff, #e6e6e6);
+    border: 2px solid #ccc;
+}
+.bingo-cells {
+    /* Grid with 5 rows (fixed slots) */
+    display: grid;
+    grid-template-rows: repeat(5, 48px);
+    gap: 6px;
+    min-height: calc(5 * 48px + 4 * 6px);
+    width: 60px;
+    align-items: center;
+    justify-items: center;
+}
+.bingo-cell {
+    inline-size: 48px;
+    block-size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 2px solid #007BFF;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    font-weight: bold;
+}
+.bingo-cell.marked {
+    background-color: #007BFF;
+    color: #fff;
+    border-color: #0056b3;
+}
+
+/* Optional: different header colors per letter */
+#col-B .bingo-header { background-color: #cfe8ff; border-color: #7fb3ff; }
+#col-I .bingo-header { background-color: #ffe6cf; border-color: #ffc07f; }
+#col-N .bingo-header { background-color: #e6ffd6; border-color: #9fe79f; }
+#col-G .bingo-header { background-color: #ffe6f0; border-color: #ff9fcf; }
+#col-O .bingo-header { background-color: #f0e6ff; border-color: #c79fff; }
+
+/* Visual cue for completed column */
+.bingo-column.column-complete .bingo-header {
+    box-shadow: 0 0 12px rgba(0, 150, 0, 0.5);
+    border-color: #28a745 !important;
+    background: #dff5e6 !important;
+}
+
+/* Visual cue for completed row */
+.bingo-cell.row-complete {
+    background-color: #ffc107;
+    color: #222;
+    border-color: #e0a800;
+}
+
+/* Cells inside a completed column should appear green when marked; higher specificity than .row-complete */
+.bingo-column.column-complete .bingo-cell.marked {
+    background-color: #28a745 !important;
+    color: #fff !important;
+    border-color: #1e7e34 !important;
+}
+
+/* Visual cue for full card */
+.cartela-completa, body.cartela-completa {
+    background-color: #dab027;
+}
+
+/* Fireworks overlay */
+.fireworks-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+.fireworks-overlay .firework-burst {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.95;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9), 0 0 24px rgba(255,255,255,0.6);
+    animation: burst 1.2s ease-out forwards;
+}
+.fireworks-overlay .firework-burst::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.0) 60%);
+    opacity: 0.14;
+}
+@keyframes burst {
+    0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
+    60% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
+.fireworks-overlay.fade-out { opacity: 0; transition: opacity 1s ease; }
+
+#drawnNumbersList {
+    list-style-type: none;
+    padding: 0;
+}
+#drawnNumbersList li {
+    margin: 5px 0;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom:10%;
+    margin-top:10px;
+    border-radius: 9px;
+
+    
+}
